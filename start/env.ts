@@ -10,6 +10,8 @@
 */
 
 import { Env } from '@adonisjs/core/env'
+import { VerificationToken } from '@adonisjs/core/helpers'
+import { VERSION } from 'luxon'
 
 export default await Env.create(new URL('../', import.meta.url), {
   NODE_ENV: Env.schema.enum(['development', 'production', 'test'] as const),
@@ -39,4 +41,18 @@ export default await Env.create(new URL('../', import.meta.url), {
   REDIS_HOST: Env.schema.string({ format: 'host' }),
   REDIS_PORT: Env.schema.number(),
   REDIS_PASSWORD: Env.schema.string.optional(),
+
+  URL: Env.schema.string(),
+  VERIFICATION_TOKEN: Env.schema.string(),
+  VERIFICATION_TOKEN_EXPIRATION: Env.schema.string(),
+
+  /*
+  |----------------------------------------------------------
+  | Variables for configuring the mail package
+  |----------------------------------------------------------
+  */
+  SMTP_HOST: Env.schema.string(),
+  SMTP_PORT: Env.schema.string(),
+  SMTP_USERNAME: Env.schema.string(),
+  SMTP_PASSWORD: Env.schema.string(),
 })

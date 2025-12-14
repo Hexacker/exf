@@ -1,0 +1,15 @@
+@each(messageType in ['success', 'error', 'warning', 'info', 'notification'])
+  @flashMessage(messageType)
+    @let(flashData = flashMessages.get(messageType))
+    @let(notificationType = messageType === 'notification' ? 'info' : messageType)
+    
+    <div class="mb-6">
+      @!component('components/form/notification', {
+      type: notificationType,
+      message: flashData.message || flashData,
+      title: flashData.title,
+      actions: flashData.actions
+      })
+    </div>
+  @end
+@end

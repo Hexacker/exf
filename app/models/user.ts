@@ -4,6 +4,7 @@ import { compose } from '@adonisjs/core/helpers'
 import { BaseModel, column, beforeCreate } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { randomUUID } from 'node:crypto'
+import { DbRememberMeTokensProvider } from '@adonisjs/auth/session'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -15,6 +16,8 @@ export default class User extends compose(BaseModel, AuthFinder) {
   public static assignUUID(user: User) {
     user.id = randomUUID()
   }
+
+  static rememberMeTokens = DbRememberMeTokensProvider.forModel(User)
 
   @column({ isPrimary: true })
   declare id: string

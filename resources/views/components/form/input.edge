@@ -1,0 +1,46 @@
+@let(oldValue= name ? old(name) : '')
+@let(value = $props.value || oldValue || '')
+
+<div class="relative">
+  @if($slots.label || label)
+    <label class="font-medium text-gray-900">
+      @if($slots.label)
+        {{{ await $slots.label() }}}
+        @else
+        {{ label }}
+      @end
+    </label>
+  @end
+  @if(type === 'password')
+    <input
+    type="{{ type }}"
+    name="{{ name }}"
+    for="{{ name }}"
+    value="{{ value }}"
+    placeholder="{{ placeholder || '' }}"
+    class="block w-full px-4 py-4 mt-2 text-xl placeholder-gray-400 bg-gray-100 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50"
+    data-primary="blue-600"
+    data-rounded="rounded-lg"
+    {{ required ? 'required' : '' }}
+    />
+    @else
+    <input
+    type="{{ type || 'text' }}"
+    name="{{ name || '' }}"
+    placeholder="{{ placeholder || '' }}"
+    for="{{ name }}"
+    value="{{ value }}"
+    class="block w-full px-4 py-4 mt-2 text-xl placeholder-gray-400 bg-gray-100 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50"
+    data-primary="blue-600"
+    data-rounded="rounded-lg"
+    {{ required ? 'required' : '' }}
+    />
+  @end
+  @if(name)
+    @inputError(name)
+      <p class="mt-2 text-sm text-red-600">
+        {{ $messages.join(', ') }}
+      </p>
+    @end
+  @end
+</div>

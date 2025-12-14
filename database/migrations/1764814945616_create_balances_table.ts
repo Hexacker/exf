@@ -9,6 +9,8 @@ export default class extends BaseSchema {
       table.string('currency', 3).notNullable()
       table.uuid('user_id').references('id').inTable('users').onDelete('CASCADE')
       table.integer('amount').notNullable().defaultTo(0)
+      table.boolean('is_active').notNullable().defaultTo(true)
+      table.string('status', 20).notNullable().defaultTo('active')
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })
