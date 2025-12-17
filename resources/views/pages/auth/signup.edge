@@ -36,7 +36,13 @@
                       @!form.input({ label: 'First Name', name: 'first_name', placeholder: 'John' })
                       @!form.input({ label: 'Last Name', name: 'last_name', placeholder: 'Doe' })
                       @!form.input({ label: 'Email', name: 'email', type: 'email', placeholder: 'john.doe@example.com' })
-                      @!form.input({ type: 'password', name: 'password', label: 'Password', placeholder: '********' })
+                      @!form.input({
+                      type: 'password',
+                      name: 'password',
+                      label: 'Password',
+                      placeholder: '********',
+                      validatePassword: true
+                      })
                       <div class="relative">
                         <button type="submit" class="inline-block w-full px-5 py-4 text-lg font-medium text-center text-white transition duration-200 bg-buttons-500 rounded-lg hover:bg-secondary ease" data-primary="blue-600" data-rounded="rounded-lg">Create Account</button>
                   <a href="#_" class="inline-block w-full px-5 py-4 mt-3 text-lg font-bold text-center text-gray-900 transition duration-200 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 ease" data-rounded="rounded-lg">Sign up with Google</a>

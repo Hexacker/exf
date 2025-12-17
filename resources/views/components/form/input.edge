@@ -1,46 +1,104 @@
-@let(oldValue= name ? old(name) : '')
+@let(oldValue = name ? old(name) : '')
 @let(value = $props.value || oldValue || '')
+@let(validatePassword = $props.validatePassword || false)
+@let(inputId = name ? `input-${name}` : '')
 
-<div class="relative">
-  @if($slots.label || label)
-    <label class="font-medium text-gray-900">
-      @if($slots.label)
-        {{{ await $slots.label() }}}
-        @else
-        {{ label }}
-      @end
-    </label>
-  @end
-  @if(type === 'password')
+@if(validatePassword)
+  <div class="relative" x-data="passwordValidator" x-init="password = '{{ value }}'">
+    @else
+    <div class="relative">
+@end
+
+@if($slots.label || label)
+  <label for="{{ inputId }}" class="font-medium text-gray-900">
+    @if($slots.label)
+      {{{ await $slots.label() }}}
+      @else
+      {{ label }}
+    @end
+  </label>
+@end
+
+@if(type === 'password')
+  @if(validatePassword)
     <input
     type="{{ type }}"
+    id="{{ inputId }}"
     name="{{ name }}"
-    for="{{ name }}"
-    value="{{ value }}"
+    x-model="password"
     placeholder="{{ placeholder || '' }}"
     class="block w-full px-4 py-4 mt-2 text-xl placeholder-gray-400 bg-gray-100 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50"
+    :class="{ 'ring-2 ring-green-500': isValid && password.length > 0 }"
     data-primary="blue-600"
     data-rounded="rounded-lg"
     {{ required ? 'required' : '' }}
+    @input="validatePassword(); showRules = true"
+    @focus="showRules = true"
     />
+    
+    <div x-show="showRules && password.length > 0" x-transition class="mt-3 p-3 bg-gray-50 rounded-lg border border-gray-200">
+      <p class="text-sm font-medium text-gray-700 mb-2">Password must contain:</p>
+        <ul class="space-y-1 text-sm">
+          <li :class="rules.minLength ? 'text-green-600' : 'text-gray-500'" class="flex items-center">
+            <span x-show="rules.minLength" class="mr-2">✓</span>
+            <span x-show="!rules.minLength" class="mr-2">○</span>
+              At least 8 characters
+          </li>
+          <li :class="rules.hasUppercase ? 'text-green-600' : 'text-gray-500'" class="flex items-center">
+            <span x-show="rules.hasUppercase" class="mr-2">✓</span>
+            <span x-show="!rules.hasUppercase" class="mr-2">○</span>
+              One uppercase letter
+          </li>
+          <li :class="rules.hasLowercase ? 'text-green-600' : 'text-gray-500'" class="flex items-center">
+            <span x-show="rules.hasLowercase" class="mr-2">✓</span>
+            <span x-show="!rules.hasLowercase" class="mr-2">○</span>
+              One lowercase letter
+          </li>
+          <li :class="rules.hasNumber ? 'text-green-600' : 'text-gray-500'" class="flex items-center">
+            <span x-show="rules.hasNumber" class="mr-2">✓</span>
+            <span x-show="!rules.hasNumber" class="mr-2">○</span>
+              One number
+          </li>
+          <li :class="rules.hasSpecial ? 'text-green-600' : 'text-gray-500'" class="flex items-center">
+            <span x-show="rules.hasSpecial" class="mr-2">✓</span>
+            <span x-show="!rules.hasSpecial" class="mr-2">○</span>
+              One special character
+          </li>
+        </ul>
+    </div>
     @else
     <input
-    type="{{ type || 'text' }}"
-    name="{{ name || '' }}"
-    placeholder="{{ placeholder || '' }}"
-    for="{{ name }}"
+    type="{{ type }}"
+    id="{{ inputId }}"
+    name="{{ name }}"
     value="{{ value }}"
+    placeholder="{{ placeholder || '' }}"
     class="block w-full px-4 py-4 mt-2 text-xl placeholder-gray-400 bg-gray-100 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50"
     data-primary="blue-600"
     data-rounded="rounded-lg"
     {{ required ? 'required' : '' }}
     />
   @end
-  @if(name)
-    @inputError(name)
-      <p class="mt-2 text-sm text-red-600">
-        {{ $messages.join(', ') }}
-      </p>
-    @end
+  @else
+  <input
+  type="{{ type || 'text' }}"
+  id="{{ inputId }}"
+  name="{{ name || '' }}"
+  placeholder="{{ placeholder || '' }}"
+  value="{{ value }}"
+  class="block w-full px-4 py-4 mt-2 text-xl placeholder-gray-400 bg-gray-100 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50"
+  data-primary="blue-600"
+  data-rounded="rounded-lg"
+  {{ required ? 'required' : '' }}
+  />
+@end
+
+@if(name)
+  @inputError(name)
+    <p id="{{ inputId }}-error" class="mt-2 text-sm text-red-600" aria-live="assertive">
+      {{ $messages.join(', ') }}
+    </p>
   @end
-</div>
+@end
+    </div>
+    

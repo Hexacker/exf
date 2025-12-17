@@ -4,10 +4,7 @@ import { userLoginValidator } from '#validators/auth_validator'
 
 export default class SigninsController {
   async view({ view }: HttpContext) {
-    // logger.info('Debug loki test log', {
-    //   test: 'debug-route',
-    // })
-    return view.render('pages/auth/login')
+    return view.render('pages/auth/signin')
   }
 
   async store({ request, response, auth, session }: HttpContext) {

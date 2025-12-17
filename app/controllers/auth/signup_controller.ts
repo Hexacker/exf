@@ -1,5 +1,5 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import CacheService from '#services/cache_service'
+// import CacheService from '#services/cache_service'
 import { inject } from '@adonisjs/core'
 import User from '#models/user'
 import env from '#start/env'
@@ -10,7 +10,7 @@ import jwt from 'jsonwebtoken'
 
 @inject()
 export default class SignupController {
-  constructor(private cacheService: CacheService) {}
+  // constructor(private cacheService: CacheService) {}
 
   async view({ view }: HttpContext) {
     return view.render('pages/auth/signup')
@@ -48,7 +48,7 @@ export default class SignupController {
     } catch (error) {
       console.error(error)
     }
-    return response.redirect().back()
+    return response.redirect().toPath('/')
     //return response.status(201).json({ message: 'User created successfully' })
   }
 }
