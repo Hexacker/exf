@@ -1,58 +1,102 @@
 @layout.app({title: 'Sign In', index: true, description: 'Sign in to your account'})
-<main class="h-screen flex justify-center items-center bg-gray-50">
-  <section class="w-full bg-whtie">
+<main class="min-h-screen flex items-center justify-center bg-[color-mix(in_oklch,var(--color-primary)_5%,white)] py-12 px-4 sm:px-6 lg:px-8">
+  <section class="w-full max-w-4xl">
     @flashMessage('notification')
-      <div class="text-red-500 bg-red-50 p-4 m-4 rounded text-sm">
+      <div class="text-red-500 bg-red-50 p-4 rounded text-sm mb-4">
         {{ $message.message }}
       </div>
     @end
     @error('E_INVALID_CREDENTIALS')
-      <p role="alert" class="text-red-500 bg-red-50 p-4 m-4 rounded text-sm">
+      <p role="alert" class="text-red-500 bg-red-50 p-4 rounded text-sm mb-4">
         {{ $message }}
       </p>
     @end
-    <section class="w-full px-8 py-16 bg-gray-100 xl:px-8">
-      <div class="max-w-5xl mx-auto">
-        <div class="flex flex-col items-center md:flex-row">
-          
-          <div class="w-full space-y-5 md:w-3/5 md:pr-16">
-            <p class="font-medium text-blue-500 uppercase" data-primary="blue-500">Building Businesses</p>
-              <h2 class="text-2xl font-extrabold leading-none text-black sm:text-3xl md:text-5xl">
-                Changing The Way People Do Business.
-              </h2>
-            <p class="text-xl text-gray-600 md:pr-16">Learn how to engage with your visitors and teach them about your mission. We're revolutionizing the way customers and businesses interact.</p>
-          </div>
-          
-          <div class="w-full mt-16 md:mt-0 md:w-2/5">
-            <div class="relative z-10 h-auto p-8 py-10 overflow-hidden bg-white border-b-2 border-gray-300 rounded-lg shadow-2xl px-7" data-rounded="rounded-lg" data-rounded-max="rounded-full">
-              <h3 class="mb-6 text-2xl font-medium text-center">Sign in to your Account</h3>
-                <input type="text" name="email" id="email" class="block w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none" data-rounded="rounded-lg" data-primary="blue-500" placeholder="Email address">
-                  <input type="password" name="password" id="password" class="block w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none" data-rounded="rounded-lg" data-primary="blue-500" placeholder="Password">
-                    <div class="block">
-                      <button class="w-full px-3 py-4 font-medium text-white bg-blue-600 rounded-lg" data-primary="blue-600" data-rounded="rounded-lg">Log Me In</button>
-            <p class="w-full mt-4 text-sm text-center text-gray-500">Forgot Password? <a href="#_" class="text-blue-500 underline">Reset</a></p>
-                <div class="relative">
-                  <div class="absolute inset-0 flex items-center">
-                  <div class="w-full border-t border-gray-300"></div>
-                  </div>
-                  <div class="relative flex justify-center text-sm">
-                    <span class="px-2 py-4 bg-white text-gray-500">
-                      or continue with
-                    </span>
-                  </div>
-                </div>
-              <a href="#_" class="inline-block w-full px-5 py-4 mt-3 text-lg font-bold text-center text-gray-900 transition duration-200 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 ease" data-rounded="rounded-lg">Sign in with Google</a>
-                    </div>
-            <p class="w-full mt-4 text-sm text-center text-gray-500">Don't have an account? <a href="#_" class="text-blue-500 underline">Sign up here</a></p>
-                
-            </div>
-            
-          </div>
-          
-          
+    
+    <div class="flex flex-col lg:flex-row bg-white rounded-xl shadow-lg overflow-hidden">
+      <!-- Left side with content -->
+      <div class="w-full lg:w-1/2 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-secondary)] p-8 text-white flex flex-col justify-center">
+        <div class="space-y-5">
+          <p class="font-medium uppercase tracking-wide opacity-90">Building Businesses</p>
+            <h2 class="text-2xl font-extrabold leading-tight sm:text-3xl">
+              Changing The Way People Do Business.
+            </h2>
+          <p class="text-[color-mix(in_oklch,var(--color-secondary)_20%,white)] max-w-md">Learn how to engage with your visitors and teach them about your mission. We're revolutionizing the way customers and businesses interact.</p>
         </div>
       </div>
-    </section>
+      
+      <!-- Right side with form -->
+      <div class="w-full lg:w-1/2 p-8">
+        <div class="text-center mb-8">
+          <h3 class="text-2xl font-bold text-[var(--text-color)]">Welcome back</h3>
+          <p class="mt-2 text-[color-mix(in_oklch,var(--color-primary)_50%,black)]">Sign in to your account</p>
+        </div>
+        
+        <form action="{{ route('auth.signin.store') }}" method="POST" class="space-y-6">
+          {{ csrfField() }}
+          @!form.input({ label: 'Email', name: 'email', type: 'email', placeholder: 'you@example.com' })
+          @!form.input({ type: 'password', name: 'password', label: 'Password', placeholder: '••••••••' })
+          
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <input
+              id="remember_me"
+              name="remember_me"
+              type="checkbox"
+              class="h-4 w-4 text-[var(--color-primary)] focus:ring-[var(--color-primary)] border-[color-mix(in_oklch,var(--color-primary)_30%,white)] rounded"
+              >
+              <label for="remember_me" class="ml-2 block text-sm text-[var(--text-color)]">Remember me</label>
+            </div>
+            
+            <div class="text-sm">
+              <a href="{{ route('auth.resetPassword.show') }}" class="font-medium text-[var(--color-primary)] hover:text-[color-mix(in_oklch,var(--color-primary)_25%,black)]">Forgot your password?</a>
+            </div>
+          </div>
+          
+          <div class="pt-2">
+            @!form.button({
+            type: 'submit',
+            text: 'Sign in',
+            textColor: 'white',
+            variant: 'primary',
+            class: 'w-full'
+            })
+          </div>
+        </form>
+        
+        <div class="mt-6">
+          <div class="relative">
+            <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-[color-mix(in_oklch,var(--color-primary)_30%,white)]"></div>
+            </div>
+            <div class="relative flex justify-center text-sm">
+              <span class="px-2 bg-white text-[color-mix(in_oklch,var(--color-primary)_40%,white)]">Or continue with</span>
+            </div>
+          </div>
+          
+          <div class="mt-6">
+            <a
+            href="/auth/google"
+            class="w-full flex justify-center items-center px-4 py-2 border border-[color-mix(in_oklch,var(--color-primary)_30%,white)] rounded-md shadow-sm text-sm font-medium text-[color-mix(in_oklch,var(--color-primary)_60%,black)] bg-[color-mix(in_oklch,var(--color-primary)_5%,white)] hover:bg-[color-mix(in_oklch,var(--color-primary)_10%,white)]"
+            >
+            <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+            </svg>
+            Sign in with Google
+              </a>
+          </div>
+        </div>
+        
+        <div class="mt-6 text-center">
+          <p class="text-sm text-[color-mix(in_oklch,var(--color-primary)_50%,black)]">
+            Don't have an account?
+            <a href="{{ route('auth.register.show') }}" class="font-medium text-[var(--color-primary)] hover:text-[color-mix(in_oklch,var(--color-primary)_25%,black)]">Sign up</a>
+          </p>
+        </div>
+      </div>
+    </div>
   </section>
 </main>
 @end

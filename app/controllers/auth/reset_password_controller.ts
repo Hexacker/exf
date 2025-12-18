@@ -12,13 +12,12 @@ export default class ResetPasswordsController {
     const { email } = request.only(['email'])
     const findUser = await User.findBy('email', email)
     if (findUser && findUser.isActive) {
-      const passwordResetToken = jwt.sign(
-        { email: findUser.email },
-        env.get('VERIFICATION_TOKEN'),
-        {
-          expiresIn: env.get('VERIFICATION_TOKEN_EXPIRATION'),
-        }
-      )
+      const secret = env.get('VERIFICATION_TOKEN') as string
+
+      const passwordResetToken = jwt.sign({ email: findUser.email }, `${secret}`, {
+        expiresIn: `${env.get('VERIFICATION_TOKEN_EXPIRATION')}h`,
+      })
+
       if (passwordResetToken) {
         const url = `${env.get('URL')}/auth/password/${passwordResetToken}`
         // THE URL MUST BE SENT BY EMAIL
@@ -31,45 +30,66 @@ export default class ResetPasswordsController {
       console.log('could not find user or user is not active')
     }
   }
+
   async resetView({ view, request }: HttpContext) {
     return view.render('pages/auth/resetPassword', { token: request.param('token') })
   }
 
   async handle({ request, response, auth, session }: HttpContext) {
     const token = request.param('token')
-    const verifyToken: any = jwt.verify(token, env.get('VERIFICATION_TOKEN'))
-    if (verifyToken) {
-      const findUser = await User.findBy({ email: verifyToken.email })
-      if (findUser && findUser.email) {
-        const { password, confirmPassword } = request.only(['password', 'confirmPassword'])
-        if (password === confirmPassword) {
-          findUser.password = password
-          await findUser.save()
-          auth.use('web').login(findUser)
-          response.redirect().toRoute('/')
+    const secret = env.get('VERIFICATION_TOKEN')
+
+    if (!secret) {
+      throw new Error('Missing JWT verification secret')
+    }
+
+    try {
+      const verifyToken = jwt.verify(token, secret) as { email: string }
+
+      if (verifyToken) {
+        const findUser = await User.findBy({ email: verifyToken.email })
+        if (findUser && findUser.email) {
+          const { password, confirmPassword } = request.only(['password', 'confirmPassword'])
+          if (password === confirmPassword) {
+            findUser.password = password
+            await findUser.save()
+            auth.use('web').login(findUser)
+            response.redirect().toRoute('/')
+          } else {
+            session.flash({
+              notification: {
+                type: 'error',
+                message: 'Make sure you enter the same password',
+              },
+            })
+            response.redirect().back()
+          }
         } else {
           session.flash({
             notification: {
               type: 'error',
-              message: 'Make sure you enter the same password',
+              message: 'There is no user with this email',
             },
           })
+          response.redirect().back()
         }
       } else {
         session.flash({
           notification: {
             type: 'error',
-            message: 'There is no user with this email',
+            message: 'Invalid password reset token',
           },
         })
+        response.redirect().back()
       }
-    } else {
+    } catch (error) {
       session.flash({
         notification: {
           type: 'error',
-          message: 'Invalid password reset token',
+          message: 'Invalid or expired password reset token',
         },
       })
+      response.redirect().back()
     }
   }
 }

@@ -10,7 +10,7 @@
 @end
 
 @if($slots.label || label)
-  <label for="{{ inputId }}" class="font-medium text-gray-900">
+  <label for="{{ inputId }}" class="font-medium text-[var(--text-color)]">
     @if($slots.label)
       {{{ await $slots.label() }}}
       @else
@@ -27,39 +27,39 @@
     name="{{ name }}"
     x-model="password"
     placeholder="{{ placeholder || '' }}"
-    class="block w-full px-4 py-4 mt-2 text-xl placeholder-gray-400 bg-gray-100 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50"
-    :class="{ 'ring-2 ring-green-500': isValid && password.length > 0 }"
-    data-primary="blue-600"
+    class="block w-full px-4 py-4 mt-2 text-xl placeholder:text-[color-mix(in_oklch,oklch(0.1742_0.0675_259.01)_40%,white)] bg-[color-mix(in_oklch,oklch(0.1742_0.0675_259.01)_10%,white)] rounded-lg focus:outline-none focus:ring-4 focus:ring-[var(--color-primary)] focus:ring-opacity-50"
+    :class="{ 'ring-2 ring-[var(--color-buttons-500)]': isValid && password.length > 0 }"
+    data-primary="[var(--color-primary)]"
     data-rounded="rounded-lg"
     {{ required ? 'required' : '' }}
     @input="validatePassword(); showRules = true"
     @focus="showRules = true"
     />
     
-    <div x-show="showRules && password.length > 0" x-transition class="mt-3 p-3 bg-gray-50 rounded-lg border border-gray-200">
-      <p class="text-sm font-medium text-gray-700 mb-2">Password must contain:</p>
+    <div x-show="showRules && password.length > 0" x-transition class="mt-3 p-3 bg-[color-mix(in_oklch,oklch(0.1742_0.0675_259.01)_5%,white)] rounded-lg border border-[color-mix(in_oklch,oklch(0.1742_0.0675_259.01)_20%,white)]">
+      <p class="text-sm font-medium text-[color-mix(in_oklch,oklch(0.1742_0.0675_259.01)_70%,black)] mb-2">Password must contain:</p>
         <ul class="space-y-1 text-sm">
-          <li :class="rules.minLength ? 'text-green-600' : 'text-gray-500'" class="flex items-center">
+          <li :class="rules.minLength ? 'text-[var(--color-buttons-500)]' : 'text-[color-mix(in_oklch,oklch(0.1742_0.0675_259.01)_40%,white)]'" class="flex items-center">
             <span x-show="rules.minLength" class="mr-2">✓</span>
             <span x-show="!rules.minLength" class="mr-2">○</span>
               At least 8 characters
           </li>
-          <li :class="rules.hasUppercase ? 'text-green-600' : 'text-gray-500'" class="flex items-center">
+          <li :class="rules.hasUppercase ? 'text-[var(--color-buttons-500)]' : 'text-[color-mix(in_oklch,oklch(0.1742_0.0675_259.01)_40%,white)]'" class="flex items-center">
             <span x-show="rules.hasUppercase" class="mr-2">✓</span>
             <span x-show="!rules.hasUppercase" class="mr-2">○</span>
               One uppercase letter
           </li>
-          <li :class="rules.hasLowercase ? 'text-green-600' : 'text-gray-500'" class="flex items-center">
+          <li :class="rules.hasLowercase ? 'text-[var(--color-buttons-500)]' : 'text-[color-mix(in_oklch,oklch(0.1742_0.0675_259.01)_40%,white)]'" class="flex items-center">
             <span x-show="rules.hasLowercase" class="mr-2">✓</span>
             <span x-show="!rules.hasLowercase" class="mr-2">○</span>
               One lowercase letter
           </li>
-          <li :class="rules.hasNumber ? 'text-green-600' : 'text-gray-500'" class="flex items-center">
+          <li :class="rules.hasNumber ? 'text-[var(--color-buttons-500)]' : 'text-[color-mix(in_oklch,oklch(0.1742_0.0675_259.01)_40%,white)]'" class="flex items-center">
             <span x-show="rules.hasNumber" class="mr-2">✓</span>
             <span x-show="!rules.hasNumber" class="mr-2">○</span>
               One number
           </li>
-          <li :class="rules.hasSpecial ? 'text-green-600' : 'text-gray-500'" class="flex items-center">
+          <li :class="rules.hasSpecial ? 'text-[var(--color-buttons-500)]' : 'text-[color-mix(in_oklch,oklch(0.1742_0.0675_259.01)_40%,white)]'" class="flex items-center">
             <span x-show="rules.hasSpecial" class="mr-2">✓</span>
             <span x-show="!rules.hasSpecial" class="mr-2">○</span>
               One special character
@@ -73,8 +73,8 @@
     name="{{ name }}"
     value="{{ value }}"
     placeholder="{{ placeholder || '' }}"
-    class="block w-full px-4 py-4 mt-2 text-xl placeholder-gray-400 bg-gray-100 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50"
-    data-primary="blue-600"
+    class="block w-full px-4 py-4 mt-2 text-xl placeholder:text-[color-mix(in_oklch,oklch(0.1742_0.0675_259.01)_40%,white)] bg-[color-mix(in_oklch,oklch(0.1742_0.0675_259.01)_10%,white)] rounded-lg focus:outline-none focus:ring-4 focus:ring-[var(--color-primary)] focus:ring-opacity-50"
+    data-primary="[var(--color-primary)]"
     data-rounded="rounded-lg"
     {{ required ? 'required' : '' }}
     />
@@ -86,8 +86,8 @@
   name="{{ name || '' }}"
   placeholder="{{ placeholder || '' }}"
   value="{{ value }}"
-  class="block w-full px-4 py-4 mt-2 text-xl placeholder-gray-400 bg-gray-100 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50"
-  data-primary="blue-600"
+  class="block w-full px-4 py-4 mt-2 text-xl placeholder:text-[color-mix(in_oklch,oklch(0.1742_0.0675_259.01)_40%,white)] bg-[color-mix(in_oklch,oklch(0.1742_0.0675_259.01)_10%,white)] rounded-lg focus:outline-none focus:ring-4 focus:ring-[var(--color-primary)] focus:ring-opacity-50"
+  data-primary="[var(--color-primary)]"
   data-rounded="rounded-lg"
   {{ required ? 'required' : '' }}
   />

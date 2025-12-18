@@ -10,8 +10,6 @@
 */
 
 import { Env } from '@adonisjs/core/env'
-import { VerificationToken } from '@adonisjs/core/helpers'
-import { VERSION } from 'luxon'
 
 export default await Env.create(new URL('../', import.meta.url), {
   NODE_ENV: Env.schema.enum(['development', 'production', 'test'] as const),
@@ -44,7 +42,7 @@ export default await Env.create(new URL('../', import.meta.url), {
 
   URL: Env.schema.string(),
   VERIFICATION_TOKEN: Env.schema.string(),
-  VERIFICATION_TOKEN_EXPIRATION: Env.schema.string(),
+  VERIFICATION_TOKEN_EXPIRATION: Env.schema.number(),
 
   /*
   |----------------------------------------------------------

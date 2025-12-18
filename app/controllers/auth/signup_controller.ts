@@ -26,15 +26,11 @@ export default class SignupController {
     const payload = await request.validateUsing(userSignupValidator)
 
     const userCreation = await User.create(payload)
-    const expiration: string = env.get('VERIFICATION_TOKEN_EXPIRATION')
+    const secret = env.get('VERIFICATION_TOKEN')
 
-    const verificationToken = jwt.sign(
-      { email: userCreation.email },
-      env.get('VERIFICATION_TOKEN'),
-      {
-        expiresIn: expiration,
-      }
-    )
+    const verificationToken = jwt.sign({ email: userCreation.email }, `${secret}`, {
+      expiresIn: `${env.get('VERIFICATION_TOKEN_EXPIRATION')}h`,
+    })
     const url = `${env.get('URL')}/auth/verify?token=${verificationToken}`
     console.log(url)
     try {
