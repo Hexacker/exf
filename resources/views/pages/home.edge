@@ -1,41 +1,37 @@
 @layout.app({title: title || 'Dashboard - EXF'})
 
 <div class="mx-auto max-w-7xl p-8">
-  <h1 class="text-3xl font-bold mb-6">Flowbite Test Page</h1>
-    
-    @!form.button({
-      text: 'Default',
-      variant: 'primary',
-      textColor: 'white',
-      class: 'me-2 mb-2'
-      })
+  <h1 class="text-3xl font-bold mb-6">EXF Test Page</h1>
 
-    @!form.button({
-      text: 'Dropdown button',
-      variant: 'primary',
-      textColor: 'white',
-      id: 'dropdown-button',
-      class: 'text-center inline-flex items-center',
-      attributes: { 'data-dropdown-toggle': 'dropdown', type: 'button' }
+  <div class="space-y-4">
+    <a href="/auth/signup" class="block">
+      @!form.button({
+        text: 'Sign Up',
+        variant: 'primary',
+        textColor: 'white',
+        class: 'me-2 mb-2 w-full sm:w-auto'
       })
-    
-    <!-- Dropdown menu -->
-    <div id="dropdown" class="z-10 hidden bg-white divide-y divide-[color-mix(in_oklch,var(--color-primary)_10%,white)] rounded-lg shadow w-44 dark:bg-[color-mix(in_oklch,var(--color-primary)_20%,black)]">
-      <ul class="py-2 text-sm text-[color-mix(in_oklch,var(--color-primary)_60%,black)] dark:text-[color-mix(in_oklch,var(--color-primary)_30%,white)]" aria-labelledby="dropdown-button">
-        <li>
-          <a href="#" class="block px-4 py-2 hover:bg-[color-mix(in_oklch,var(--color-primary)_5%,white)] dark:hover:bg-[color-mix(in_oklch,var(--color-primary)_30%,black)] dark:hover:text-white">Dashboard</a>
-        </li>
-        <li>
-          <a href="#" class="block px-4 py-2 hover:bg-[color-mix(in_oklch,var(--color-primary)_5%,white)] dark:hover:bg-[color-mix(in_oklch,var(--color-primary)_30%,black)] dark:hover:text-white">Settings</a>
-        </li>
-        <li>
-          <a href="#" class="block px-4 py-2 hover:bg-[color-mix(in_oklch,var(--color-primary)_5%,white)] dark:hover:bg-[color-mix(in_oklch,var(--color-primary)_30%,black)] dark:hover:text-white">Earnings</a>
-        </li>
-        <li>
-          <a href="#" class="block px-4 py-2 hover:bg-[color-mix(in_oklch,var(--color-primary)_5%,white)] dark:hover:bg-[color-mix(in_oklch,var(--color-primary)_30%,black)] dark:hover:text-white">Sign out</a>
-        </li>
-      </ul>
-    </div>
+    </a>
+
+    <a href="/auth/signin" class="block">
+      @!form.button({
+        text: 'Sign In',
+        variant: 'primary',
+        textColor: 'white',
+        class: 'me-2 mb-2 w-full sm:w-auto'
+      })
+    </a>
+
+    <a href="/auth/reset" class="block">
+      @!form.button({
+        text: 'Reset Password',
+        variant: 'primary',
+        textColor: 'white',
+        class: 'me-2 mb-2 w-full sm:w-auto'
+      })
+    </a>
+  </div>
+
 </div>
 
 @end
