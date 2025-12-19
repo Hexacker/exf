@@ -1,7 +1,7 @@
 @layout.app({title: 'Sign Up'})
-<main class="h-screen flex justify-center items-center bg-[color-mix(in_oklch,var(--color-primary)_5%,white)]">
-  <section class="w-full bg-white">
-    
+<main class="min-h-screen flex justify-center items-center bg-[color-mix(in_oklch,var(--color-primary)_5%,white)] py-8">
+  <section class="w-full max-w-6xl bg-white rounded-xl shadow-lg overflow-hidden">
+
     @flashMessage('notification')
       <div class="text-red-500 bg-red-50 p-4 m-4 rounded text-sm">
         {{ $message.message }}
@@ -12,26 +12,25 @@
         {{ $message }}
       </p>
     @end
-    <div class="mx-auto max-w-7xl">
-      <div class="flex flex-col lg:flex-row">
-        <div class="relative w-full bg-cover lg:w-6/12 xl:w-7/12 bg-gradient-to-r from-white via-white to-gray-100">
-          <div class="relative flex flex-col items-center justify-center w-full h-full px-10 my-20 lg:px-16 lg:my-0">
-            <div class="flex flex-col items-start space-y-8 tracking-tight lg:max-w-3xl">
+    <div class="flex flex-col md:flex-row">
+        <div class="relative w-full bg-cover md:w-1/2 bg-gradient-to-r from-white via-white to-gray-100 p-8 md:p-12 flex flex-col justify-center">
+          <div class="max-w-md mx-auto">
+            <div class="flex flex-col items-start space-y-6 tracking-tight">
               <div class="relative">
-                <p class="mb-2 font-medium text-[color-mix(in_oklch,var(--color-primary)_60%,black)] uppercase">Work smarter</p>
-                  <h2 class="text-5xl font-bold text-[var(--text-color)] xl:text-6xl">Welcome to EXF platform.</h2>
+                <p class="mb-2 font-medium text-[color-mix(in_oklch,var(--color-primary)_60%,black)] uppercase text-sm">Work smarter</p>
+                  <h2 class="text-3xl md:text-4xl font-bold text-[var(--text-color)]">Welcome to EXF platform.</h2>
               </div>
-                <p class="text-2xl text-[color-mix(in_oklch,var(--color-primary)_60%,black)]">We've created a simple formula to follow in order to gain more out of your business and your application.</p>
-                  <a href="#_" class="inline-block px-8 py-5 text-xl font-medium text-center text-white transition duration-200 bg-[var(--color-primary)] rounded-lg hover:bg-[color-mix(in_oklch,var(--color-primary)_25%,black)] ease" data-primary="var(--color-primary)" data-rounded="rounded-lg">Get Started Today</a>
+                <p class="text-base md:text-lg text-[color-mix(in_oklch,var(--color-primary)_60%,black)]">We've created a simple formula to follow in order to gain more out of your business and your application.</p>
+                  <a href="#_" class="inline-block px-6 py-3 text-base font-medium text-center text-white transition duration-200 bg-[var(--color-primary)] rounded-lg hover:bg-[color-mix(in_oklch,var(--color-primary)_25%,black)] ease mt-4" data-primary="var(--color-primary)" data-rounded="rounded-lg">Get Started Today</a>
             </div>
           </div>
         </div>
-        
-        <div class="w-full bg-white lg:w-6/12 xl:w-5/12">
-          <div class="flex flex-col items-start justify-start w-full h-full p-10 lg:p-16 xl:p-24">
-            <h4 class="w-full text-3xl font-bold text-[var(--text-color)]">Signup</h4>
-                <p class="text-lg text-[color-mix(in_oklch,var(--color-primary)_40%,white)]">or, if you have an account you can <a href="{{ route('auth.signin.show') }}" class="text-[var(--color-primary)] underline" data-primary="var(--color-primary)">sign in</a></p>
-                    <form action="{{ route('auth.register.store') }}" method="POST" class="relative w-full mt-10 space-y-8">
+
+        <div class="w-full md:w-1/2 bg-white p-8 md:p-12 flex flex-col justify-center">
+          <div class="max-w-md w-full mx-auto">
+            <h4 class="w-full text-2xl md:text-3xl font-bold text-[var(--text-color)] mb-2">Signup</h4>
+                <p class="text-base text-[color-mix(in_oklch,var(--color-primary)_40%,white)] mb-6">or, if you have an account you can <a href="{{ route('auth.signin.show') }}" class="text-[var(--color-primary)] underline" data-primary="var(--color-primary)">sign in</a></p>
+                    <form action="{{ route('auth.register.store') }}" method="POST" class="relative w-full space-y-6">
                       {{ csrfField() }}
                       @!form.input({ label: 'First Name', name: 'first_name', placeholder: 'John' })
                       @!form.input({ label: 'Last Name', name: 'last_name', placeholder: 'Doe' })
@@ -43,7 +42,7 @@
                       placeholder: '********',
                       validatePassword: true
                       })
-                      <div class="relative">
+                      <div class="space-y-4">
                         @!form.button({
                         type: 'submit',
                         text: 'Create Account',
@@ -51,15 +50,14 @@
                         class: 'w-full',
                         textColor: 'white'
                         })
-                  <a href="#_" class="inline-block w-full px-5 py-4 mt-3 text-lg font-bold text-center text-gray-900 transition duration-200 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 ease" data-rounded="rounded-lg">Sign up with Google</a>
+                  <a href="#_" class="inline-block w-full px-5 py-3 text-base font-bold text-center text-gray-900 transition duration-200 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 ease" data-rounded="rounded-lg">Sign up with Google</a>
                       </div>
                     </form>
           </div>
         </div>
       </div>
-    </div>
-    
+
   </section>
-  
+
 </main>
 @end
