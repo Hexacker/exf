@@ -15,7 +15,13 @@ export default class extends BaseSchema {
       table.string('password').notNullable()
       table.boolean('is_active').notNullable().defaultTo(false)
       table.boolean('is_verified').notNullable().defaultTo(false)
-      table.enu('role', ['admin', 'user']).nullable().defaultTo(Roles.USER)
+      table.string('phone_number').nullable()
+      table.string('job_title').nullable()
+      table
+        .enu('status', ['pending', 'new', 'trusted', 'review', 'blocked'])
+        .notNullable()
+        .defaultTo('pending')
+      table.enu('role', ['admin', 'user']).notNullable().defaultTo(Roles.USER)
 
       table.timestamp('created_at').notNullable()
       table.timestamp('updated_at').nullable().defaultTo(this.now())

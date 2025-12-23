@@ -1,5 +1,9 @@
-<button
-type="{{ type || 'button' }}"
+@if(link)
+  <a href="{{ link }}"
+@else
+  <button
+  type="{{ type || 'button' }}"
+@end
 {{ $props.merge({
 class: [
 'inline-flex',
@@ -94,7 +98,9 @@ textColor ? 'text-' + textColor : 'text-gray-700',
 'ring-black/10'
 ]
 }).toAttrs() }}
+@if(!link)
 >
+@end
 @if(icon)
   <icon name="{{ icon }}" class="mr-2 {{ size === 'sm' ? 'w-4 h-4' : size === 'lg' ? 'w-5 h-5' : 'w-4 h-4' }}" />
 @end
@@ -111,4 +117,8 @@ textColor ? 'text-' + textColor : 'text-gray-700',
 
 <!-- Animated background element for extra visual effect -->
 <span class="absolute top-0 left-0 w-full h-full bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-xl"></span>
+@if(!link)
 </button>
+@else
+</a>
+@end

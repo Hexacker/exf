@@ -1,37 +1,38 @@
 @layout.app({title: title || 'Dashboard - EXF'})
 
+@include('components/partials/side')
 <div class="mx-auto max-w-7xl p-8">
   <h1 class="text-3xl font-bold mb-6">EXF Test Page</h1>
-
-  <div class="space-y-4">
-    <a href="/auth/signup" class="block">
-      @!form.button({
+    
+    <div class="space-y-4">
+      <a href="/auth/signup" class="block">
+        @!form.button({
         text: 'Sign Up',
         variant: 'primary',
         textColor: 'white',
         class: 'me-2 mb-2 w-full sm:w-auto'
-      })
-    </a>
-
-    <a href="/auth/signin" class="block">
-      @!form.button({
+        })
+      </a>
+      
+      <a href="/auth/signin" class="block">
+        @!form.button({
         text: 'Sign In',
         variant: 'primary',
         textColor: 'white',
         class: 'me-2 mb-2 w-full sm:w-auto'
-      })
-    </a>
-
-    <a href="/auth/reset" class="block">
-      @!form.button({
+        })
+      </a>
+      
+      <a href="/auth/reset" class="block">
+        @!form.button({
         text: 'Reset Password',
         variant: 'primary',
         textColor: 'white',
         class: 'me-2 mb-2 w-full sm:w-auto'
-      })
-    </a>
-  </div>
-
+        })
+      </a>
+    </div>
+    
 </div>
 
 @end
