@@ -4,7 +4,7 @@
   <h1 class="text-3xl font-bold mb-6">EXF Test Page</h1>
     
     <div class="space-y-4">
-      <a href="/auth/signup" class="block">
+      <a href="{{ route('auth.register.show') }}" class="block">
         @!form.button({
         text: 'Sign Up',
         variant: 'primary',
@@ -13,7 +13,7 @@
         })
       </a>
       
-      <a href="/auth/signin" class="block">
+      <a href="{{ route('auth.register.show') }}" class="block">
         @!form.button({
         text: 'Sign In',
         variant: 'primary',
@@ -22,7 +22,7 @@
         })
       </a>
       
-      <a href="/auth/reset" class="block">
+      <a href="{{ route('auth.register.show') }}" class="block">
         @!form.button({
         text: 'Reset Password',
         variant: 'primary',
