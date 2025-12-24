@@ -8,7 +8,7 @@ export const UserValidator = vine.object({
 })
 
 export const AddUserBirthdateValidator = vine.object({
-  birthdate: vine.date().beforeOrEqual((field) => {
+  birthdate: vine.date().beforeOrEqual(() => {
     return DateTime.now().minus({ years: 18 }).toISODate()
   }),
 })
