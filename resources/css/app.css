@@ -2,10 +2,67 @@
 @source "../views";
 
 @theme {
+  /* light theme */
   --color-primary: oklch(0.1742 0.0675 259.01);
+  --color-primary-50: oklch(0.95 0.01 259.01);
+  --color-primary-100: oklch(0.85 0.02 259.01);
+  --color-primary-200: oklch(0.75 0.03 259.01);
+  --color-primary-300: oklch(0.65 0.04 259.01);
+  --color-primary-400: oklch(0.45 0.05 259.01);
+  --color-primary-500: oklch(0.1742 0.0675 259.01);
+  --color-primary-600: oklch(0.15 0.07 259.01);
+  --color-primary-700: oklch(0.12 0.06 259.01);
+  --color-primary-800: oklch(0.09 0.05 259.01);
+  --color-primary-900: oklch(0.06 0.04 259.01);
   --color-secondary: oklch(0.3971 0.0642 255.73);
+  --color-secondary-50: oklch(0.94 0.02 255.73);
+  --color-secondary-100: oklch(0.84 0.03 255.73);
+  --color-secondary-200: oklch(0.74 0.04 255.73);
+  --color-secondary-300: oklch(0.64 0.05 255.73);
+  --color-secondary-400: oklch(0.54 0.06 255.73);
+  --color-secondary-500: oklch(0.3971 0.0642 255.73);
+  --color-secondary-600: oklch(0.35 0.07 255.73);
+  --color-secondary-700: oklch(0.25 0.06 255.73);
+  --color-secondary-800: oklch(0.15 0.05 255.73);
+  --color-secondary-900: oklch(0.05 0.04 255.73);
   --color-buttons-500: oklch(0.5106 0.2301 276.97);
   --text-color: #000;
+
+  /* dark theme */
+  --color-primary-dark: oklch(0.8 0.04 259.01);
+  --color-primary-50-dark: oklch(0.1 0.01 259.01);
+  --color-primary-100-dark: oklch(0.2 0.01 259.01);
+  --color-primary-200-dark: oklch(0.3 0.02 259.01);
+  --color-primary-300-dark: oklch(0.4 0.02 259.01);
+  --color-primary-400-dark: oklch(0.5 0.03 259.01);
+  --color-primary-500-dark: oklch(0.8 0.04 259.01);
+  --color-primary-600-dark: oklch(0.85 0.05 259.01);
+  --color-primary-700-dark: oklch(0.9 0.05 259.01);
+  --color-primary-800-dark: oklch(0.95 0.06 259.01);
+  --color-primary-900-dark: oklch(0.98 0.06 259.01);
+  --color-secondary-dark: oklch(0.7 0.04 255.73);
+  --color-secondary-50-dark: oklch(0.1 0.01 255.73);
+  --color-secondary-100-dark: oklch(0.2 0.01 255.73);
+  --color-secondary-200-dark: oklch(0.3 0.02 255.73);
+  --color-secondary-300-dark: oklch(0.4 0.02 255.73);
+  --color-secondary-400-dark: oklch(0.5 0.03 255.73);
+  --color-secondary-500-dark: oklch(0.7 0.04 255.73);
+  --color-secondary-600-dark: oklch(0.75 0.05 255.73);
+  --color-secondary-700-dark: oklch(0.8 0.05 255.73);
+  --color-secondary-800-dark: oklch(0.9 0.06 255.73);
+  --color-secondary-900-dark: oklch(0.95 0.06 255.73);
+  --color-buttons-500-dark: oklch(0.7 0.15 276.97);
+  --text-color-dark: #fff;
+
+  /* shared colors */
+  --color-info: oklch(0.55 0.12 224.14);
+  --color-on-info: #fff;
+  --color-success: oklch(0.65 0.15 160);
+  --color-on-success: #fff;
+  --color-warning: oklch(0.85 0.18 82.31);
+  --color-on-warning: #000;
+  --color-danger: oklch(0.65 0.2 22);
+  --color-on-danger: #fff;
 }
 
 @layer base {
@@ -13,5 +70,32 @@
   body {
     height: 100%;
     width: 100%;
+  }
+
+  .dark {
+    --color-primary: var(--color-primary-dark);
+    --color-primary-50: var(--color-primary-50-dark);
+    --color-primary-100: var(--color-primary-100-dark);
+    --color-primary-200: var(--color-primary-200-dark);
+    --color-primary-300: var(--color-primary-300-dark);
+    --color-primary-400: var(--color-primary-400-dark);
+    --color-primary-500: var(--color-primary-500-dark);
+    --color-primary-600: var(--color-primary-600-dark);
+    --color-primary-700: var(--color-primary-700-dark);
+    --color-primary-800: var(--color-primary-800-dark);
+    --color-primary-900: var(--color-primary-900-dark);
+    --color-secondary: var(--color-secondary-dark);
+    --color-secondary-50: var(--color-secondary-50-dark);
+    --color-secondary-100: var(--color-secondary-100-dark);
+    --color-secondary-200: var(--color-secondary-200-dark);
+    --color-secondary-300: var(--color-secondary-300-dark);
+    --color-secondary-400: var(--color-secondary-400-dark);
+    --color-secondary-500: var(--color-secondary-500-dark);
+    --color-secondary-600: var(--color-secondary-600-dark);
+    --color-secondary-700: var(--color-secondary-700-dark);
+    --color-secondary-800: var(--color-secondary-800-dark);
+    --color-secondary-900: var(--color-secondary-900-dark);
+    --color-buttons-500: var(--color-buttons-500-dark);
+    --text-color: var(--text-color-dark);
   }
 }

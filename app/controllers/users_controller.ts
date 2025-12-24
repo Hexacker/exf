@@ -10,8 +10,12 @@ export default class UsersController {
     return view.render('pages')
   }
 
-  async store({ request, response }: HttpContext) {
-    const user = await User.create(request.body())
+  async store({ request, response, auth }: HttpContext) {
+    const getUser = auth.user?.id
+    if (!getUser) {
+      return response.status(401).json({ message: 'Unauthorized' })
+    }
+    //
     response.redirect('/users')
   }
 }
