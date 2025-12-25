@@ -12,6 +12,8 @@ WORKDIR /app
 COPY --from=deps /app/node_modules /app/node_modules
 ADD . .
 RUN node ace build
+WORKDIR /app/build
+RUN npm ci --omit=dev
 
 # Production stage
 FROM base
