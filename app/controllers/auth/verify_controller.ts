@@ -16,6 +16,7 @@ export default class VerifiesController {
         findUser.isActive = true
         await findUser.save()
       }
+      return response.redirect().toRoute('auth.signin.show')
     } else {
       return response.badRequest('Failed')
 
