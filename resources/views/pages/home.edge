@@ -2,7 +2,7 @@
 
 <div class="mx-auto max-w-7xl">
   <h1 class="text-3xl font-bold mb-6">EXF Test Page</h1>
-    
+
     <div class="space-y-4">
       <a href="{{ route('auth.register.show') }}" class="block">
         @!form.button({
@@ -12,7 +12,7 @@
         class: 'me-2 mb-2 w-full sm:w-auto'
         })
       </a>
-      
+
       <a href="{{ route('auth.signin.show') }}" class="block">
         @!form.button({
         text: 'Sign In',
@@ -21,17 +21,17 @@
         class: 'me-2 mb-2 w-full sm:w-auto'
         })
       </a>
-      
-      {{-- <a href="{{ route('auth.password.resetView') }}" class="block">
+
+      <a href="{{ route('auth.resetPassword.show') }}" class="block">
         @!form.button({
         text: 'Reset Password',
         variant: 'primary',
         textColor: 'white',
         class: 'me-2 mb-2 w-full sm:w-auto'
         })
-      </a> --}}
+      </a>
     </div>
-    
+
 </div>
 
 @end
