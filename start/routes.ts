@@ -14,7 +14,7 @@ const SignupController = () => import('#controllers/auth/signup_controller')
 const VerifyController = () => import('#controllers/auth/verify_controller')
 const SigninController = () => import('#controllers/auth/signin_controller')
 const SignoutController = () => import('#controllers/auth/signouts_controller')
-const resetPasswordController = () => import('#controllers/auth/reset_password_controller')
+//const resetPasswordController = () => import('#controllers/auth/reset_password_controller')
 
 router.on('/').render('pages/home')
 
