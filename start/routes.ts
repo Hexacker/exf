@@ -35,15 +35,15 @@ router
       .post('/reset', [resetPasswordController, 'store'])
       .as('resetPassword.store')
       .use(middleware.guest())
-    router
-      .get('/password/:token', [resetPasswordController, 'resetView'])
-      .as('password.resetView')
-      .use(middleware.guest())
+    // router
+    //   .get('/password/:token', [resetPasswordController, 'resetView'])
+    //   .as('password.resetView')
+    //   .use(middleware.guest())
 
-    router
-      .post('/password/:token', [resetPasswordController, 'handle'])
-      .as('password')
-      .use(middleware.guest())
+    // router
+    //   .post('/password/:token', [resetPasswordController, 'handle'])
+    //   .as('password')
+    //   .use(middleware.guest())
   })
   .prefix('/auth')
   .as('auth')
