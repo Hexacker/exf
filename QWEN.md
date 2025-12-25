@@ -1,10 +1,12 @@
 # Session rules [#session-rules]
 ## MANDATORY CODE STANDARDS
-**CRITICAL: This project uses AdonisJS v6, EdgeJS, Tailwind CSS v4, AlpineJS v3, and PinesUI**
+**CRITICAL: This project uses AdonisJS v6, EdgeJS, Tailwind CSS v4, AlpineJS v3, PinesUI, and PinguinUI**
+- PinguinUI url: https://www.penguinui.com/components
+- PinesUI url: https://devdojo.com/pines/docs
 **RULES:**
-1. Use only valid AdonisJS v6, EdgeJS, Tailwind CSS v4, AlpineJS v3, and PinesUI.
-2. DO NOT add extra CSS code and stick to only Tailwind CSS v4, and PinesUI.
-3. Before adding any code snippet, make sure it's valid AdonisJS v6, EdgeJS, Tailwind CSS v4, AlpineJS v3, and PinesUI.
+1. Use only valid AdonisJS v6, EdgeJS, Tailwind CSS v4, AlpineJS v3, PinguinUI, and PinesUI.
+2. DO NOT add extra CSS code and stick to only Tailwind CSS v4, PinguinUI, and PinesUI.
+3. Before adding any code snippet, make sure it's valid AdonisJS v6, EdgeJS, Tailwind CSS v4, AlpineJS v3, PinguinUI, and PinesUI.
 4. Before any file operation outside the current workspace, you MUST ask the user for consent.
 5. ALWAYS use official AdonisJS v6 compatible packages `https://packages.adonisjs.com`.
 6. AVOID adding comments on every line of code, every step, and every variable name.
