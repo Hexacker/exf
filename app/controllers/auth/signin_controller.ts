@@ -9,7 +9,7 @@ export default class SigninsController {
 
   async store({ request, response, auth, session }: HttpContext) {
     const { email, password, isRememberMe } = await request.validateUsing(userLoginValidator)
-    console.log(email, password)
+    //console.log(email, password)
     const findUser = await User.findBy('email', email)
 
     if (findUser) {
@@ -17,27 +17,30 @@ export default class SigninsController {
       if (user) {
         if (user.isActive && user.isVerified) {
           await auth.use('web').login(user, isRememberMe)
-          return response.redirect().toPath('/auth/dashboard')
+          if (!user.birthdate || !user.sex) {
+            return response.redirect().toRoute('/users/update')
+          }
+          return response.redirect().toRoute('/auth/dashboard')
         } else {
           session.flash('notification', {
             type: 'error',
             message: 'Email has not been verified. Verify your email to be able to log in',
           })
-          return response.redirect().toRoute('/auth/login')
+          return response.redirect().toPath('auth.signin.show')
         }
       } else {
         session.flash('notification', {
           type: 'error',
           message: 'Invalid credentials',
         })
-        return response.redirect().toRoute('/auth/login')
+        return response.redirect().toPath('auth.signin.show')
       }
     } else {
       session.flash('notification', {
         type: 'error',
         message: 'User not found',
       })
-      return response.redirect().toRoute('/auth/login')
+      return response.redirect().toPath('auth.signin.show')
     }
   }
 }

@@ -1,0 +1,41 @@
+@let(oldValue = name ? old(name) : '')
+@let(value = $props.value || oldValue || '')
+@let(inputId = name ? `select-${name}` : '')
+
+<div class="relative">
+  @if($slots.label || label)
+    <label for="{{ inputId }}" class="font-medium text-[var(--text-color)]">
+      @if($slots.label)
+        {{{ await $slots.label() }}}
+        @else
+        {{ label }}
+      @end
+    </label>
+  @end
+  
+  <select
+  id="{{ inputId }}"
+  name="{{ name }}"
+  class="block w-full px-4 py-4 mt-2 text-xl placeholder:text-[color-mix(in_oklch,oklch(0.1742_0.0675_259.01)_40%,white)] bg-[color-mix(in_oklch,oklch(0.1742_0.0675_259.01)_10%,white)] rounded-lg focus:outline-none focus:ring-4 focus:ring-[var(--color-primary)] focus:ring-opacity-50 appearance-none"
+  data-primary="[var(--color-primary)]"
+  data-rounded="rounded-lg"
+  {{ required ? 'required' : '' }}
+  >
+  @if(placeholder)
+    <option value="" disabled selected>{{ placeholder }}</option>
+  @end
+  @each(option in options)
+    <option value="{{ option.value }}" {{ value == option.value ? 'selected' : '' }}>
+      {{ option.text || option.value }}
+    </option>
+  @end
+  </select>
+  
+  @if(name)
+    @inputError(name)
+      <p id="{{ inputId }}-error" class="mt-2 text-sm text-red-600" aria-live="assertive">
+        {{ $messages.join(', ') }}
+      </p>
+    @end
+  @end
+</div>

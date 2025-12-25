@@ -1,27 +1,29 @@
-@layout.app({title: 'Dashboard'})
-<div x-data="{ sidebarIsOpen: false }" @sidebar-toggle.window="sidebarIsOpen = $event.detail.open">
-  <div class="relative flex w-full flex-col md:flex-row">
-    <!-- This allows screen readers to skip the sidebar and go directly to the main content. -->
-    <a class="sr-only" href="#main-content">skip to the main content</a>
-
-      <!-- dark overlay for when the sidebar is open on smaller screens  -->
-  <div x-cloak x-show="sidebarIsOpen" class="fixed inset-0 z-20 bg-gray-900/10 backdrop-blur-xs md:hidden" aria-hidden="true" @click="sidebarIsOpen = false" x-transition.opacity ></div>
-
-    <!-- Sidebar -->
-    @include('components/partials/side')
-
-    <!-- Top navbar & main content -->
-    <div class="h-screen w-full overflow-y-auto bg-white dark:bg-gray-50">
-      <!-- Top navbar -->
-      @include('components/partials/nav')
-
-      <!-- Main content -->
-      <div id="main-content" class="p-4">
-        <div class="overflow-y-auto">
-          {{{ await $slots.main() }}}
+@layout.app({title: title || 'Dashboard - Workleen'})
+@if(await auth.check())
+  <div x-data="{ sidebarIsOpen: false }" @sidebar-toggle.window="sidebarIsOpen = $event.detail.open">
+    <div class="relative flex w-full flex-col md:flex-row">
+      <!-- This allows screen readers to skip the sidebar and go directly to the main content. -->
+      <a class="sr-only" href="#main-content">skip to the main content</a>
+        
+        <!-- dark overlay for when the sidebar is open on smaller screens  -->
+    <div x-cloak x-show="sidebarIsOpen" class="fixed inset-0 z-20 bg-gray-900/10 backdrop-blur-xs md:hidden" aria-hidden="true" @click="sidebarIsOpen = false" x-transition.opacity ></div>
+      
+      <!-- Sidebar -->
+      @include('components/partials/side')
+      
+      <!-- Top navbar & main content -->
+      <div class="h-screen w-full overflow-y-auto bg-white dark:bg-gray-50">
+        <!-- Top navbar -->
+        @include('components/partials/nav')
+        
+        <!-- Main content -->
+        <div id="main-content" class="p-4">
+          <div class="overflow-y-auto">
+            {{{ await $slots.main() }}}
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+@end
 @end

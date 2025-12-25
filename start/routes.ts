@@ -15,6 +15,7 @@ const VerifyController = () => import('#controllers/auth/verify_controller')
 const SigninController = () => import('#controllers/auth/signin_controller')
 const SignoutController = () => import('#controllers/auth/signouts_controller')
 const resetPasswordController = () => import('#controllers/auth/reset_password_controller')
+const UserController = () => import('#controllers/users_controller')
 
 router.on('/').render('pages/home')
 
@@ -26,7 +27,7 @@ router
     router.get('/signin', [SigninController, 'view']).as('signin.show').use(middleware.guest())
     router.post('/signin', [SigninController, 'store']).as('signin.store').use(middleware.guest())
     router.post('signout', [SignoutController, 'handle']).as('signout').use(middleware.auth())
-    router.on('/dashboard').render('pages/auth/welcome').as('dashboard').use(middleware.auth())
+    router.on('/dashboard').render('pages/auth/welcome').as('dashboard.show').use(middleware.auth())
     router
       .get('/reset', [resetPasswordController, 'view'])
       .as('resetPassword.show')
@@ -47,3 +48,11 @@ router
   })
   .prefix('/auth')
   .as('auth')
+
+router
+  .group(() => {
+    router.get('/update', [UserController, 'updateView']).as('update.show').use(middleware.auth())
+    router.post('/update', [UserController, 'update']).as('update.store').use(middleware.auth())
+  })
+  .prefix('/users')
+  .as('users')

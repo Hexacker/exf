@@ -46,8 +46,17 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column()
   declare sex: string
 
+  @column.date({ columnName: 'birth_date' })
+  declare birthdate: DateTime
+
+  @column({ columnName: 'phone_number' })
+  declare phoneNumber: string | null
+
+  @column({ columnName: 'job_title' })
+  declare jobTitle: string | null
+
   @column()
-  declare birthdate: string
+  declare status: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
