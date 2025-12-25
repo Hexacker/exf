@@ -27,14 +27,14 @@ router
     router.post('/signin', [SigninController, 'store']).as('signin.store').use(middleware.guest())
     router.post('signout', [SignoutController, 'handle']).as('signout').use(middleware.auth())
     router.on('/dashboard').render('pages/auth/welcome').as('dashboard').use(middleware.auth())
-    router
-      .get('/reset', [resetPasswordController, 'view'])
-      .as('resetPassword.show')
-      .use(middleware.guest())
-    router
-      .post('/reset', [resetPasswordController, 'store'])
-      .as('resetPassword.store')
-      .use(middleware.guest())
+    // router
+    //   .get('/reset', [resetPasswordController, 'view'])
+    //   .as('resetPassword.show')
+    //   .use(middleware.guest())
+    // router
+    //   .post('/reset', [resetPasswordController, 'store'])
+    //   .as('resetPassword.store')
+    //   .use(middleware.guest())
     // router
     //   .get('/password/:token', [resetPasswordController, 'resetView'])
     //   .as('password.resetView')
