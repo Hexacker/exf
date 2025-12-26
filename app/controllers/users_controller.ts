@@ -7,10 +7,7 @@ export default class UsersController {
   async updateView({ view, auth, response, session }: HttpContext) {
     const user = auth.user
     if (!user) {
-      session.flash('notification', {
-        type: 'error',
-        message: 'User not found',
-      })
+      session.flash('error', 'User not found')
       return response.redirect().toPath('auth.signin.show')
     }
     return view.render('pages/user/update', {
@@ -24,10 +21,7 @@ export default class UsersController {
   async update({ request, response, auth, session }: HttpContext) {
     const user = auth.user
     if (!user) {
-      session.flash('notification', {
-        type: 'error',
-        message: 'User not found',
-      })
+      session.flash('error', 'User not found')
       return response.redirect().toPath('auth.signin.show')
     }
 
@@ -64,17 +58,11 @@ export default class UsersController {
 
       await findUser.save()
 
-      session.flash('notification', {
-        type: 'success',
-        message: 'User updated successfully',
-      })
+      session.flash('success', 'User updated successfully')
 
       return response.redirect().back()
     } catch (error) {
-      session.flash('notification', {
-        type: 'error',
-        message: 'Failed to update user: ' + error.message,
-      })
+      session.flash('error', 'Failed to update user: ' + error.message)
       return response.redirect().back()
     }
   }

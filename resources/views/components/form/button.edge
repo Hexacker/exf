@@ -10,7 +10,7 @@ class: [
 'items-center',
 'justify-center',
 size === 'sm' ? 'px-4 py-2 text-xs' :
-size === 'lg' ? 'px-8 py-4 text-base' :
+size === 'lg' ? 'px-12 py-6 text-lg min-w-[150px]' :
 'px-6 py-3 text-sm',
 'font-semibold',
 'rounded-xl',
@@ -23,12 +23,12 @@ size === 'lg' ? 'px-8 py-4 text-base' :
 'overflow-hidden',
 'group',
 variant === 'primary' ? [
-textColor ? 'text-' + textColor : 'text-[var(--text-color)]',
+textColor ? 'text-' + textColor : 'text-white',
 'bg-gradient-to-r',
 'from-[var(--color-primary)]',
 'to-[var(--color-secondary)]',
-'hover:from-[color-mix(in_oklch,oklch(0.1742_0.0675_259.01)_25%,black)]',
-'hover:to-[color-mix(in_oklch,oklch(0.3971_0.0642_255.73)_25%,black)]',
+'hover:from-[color-mix(in_oklch,oklch(0.1742_0.0675_259.01)_75%,white)]',
+'hover:to-[color-mix(in_oklch,oklch(0.3971_0.0642_255.73)_75%,white)]',
 'active:from-[color-mix(in_oklch,oklch(0.1742_0.0675_259.01)_50%,black)]',
 'active:to-[color-mix(in_oklch,oklch(0.3971_0.0642_255.73)_50%,black)]',
 'focus:ring-[var(--color-primary)]',
@@ -48,7 +48,7 @@ textColor ? 'text-' + textColor : 'text-gray-700',
 'transition-all',
 'duration-200'
 ] : variant === 'danger' ? [
-textColor ? 'text-' + textColor : 'text-[var(--text-color)]',
+textColor ? 'text-' + textColor : 'text-white',
 'bg-gradient-to-r',
 'from-red-500',
 'to-red-600',
@@ -63,7 +63,7 @@ textColor ? 'text-' + textColor : 'text-[var(--text-color)]',
 'duration-300',
 'ease-in-out'
 ] : variant === 'success' ? [
-textColor ? 'text-' + textColor : 'text-[var(--text-color)]',
+textColor ? 'text-' + textColor : 'text-white',
 'bg-gradient-to-r',
 'from-green-500',
 'to-green-600',
@@ -102,7 +102,7 @@ textColor ? 'text-' + textColor : 'text-gray-700',
 >
 @end
 @if(icon)
-  <icon name="{{ icon }}" class="mr-2 {{ size === 'sm' ? 'w-4 h-4' : size === 'lg' ? 'w-5 h-5' : 'w-4 h-4' }}" />
+  <icon name="{{ icon }}" class="mr-2 {{ size === 'sm' ? 'w-4 h-4' : size === 'lg' ? 'w-4 h-4' : 'w-4 h-4' }}" />
 @end
 
 @if($slots.default)
